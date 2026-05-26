@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# If you run into Netlify build errors about Node versions,
+# you can pin the version here (must be supported by Netlify):
+# [build.environment]
+#   NODE_VERSION = "22"
+
