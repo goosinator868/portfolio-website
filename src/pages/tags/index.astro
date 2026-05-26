@@ -1,27 +1,16 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { ui } from '../../../i18n/ui';
-import { useTranslations } from '../../../i18n/utils';
+import { useTranslations } from '../../i18n/utils';
 import type { CollectionEntry } from 'astro:content';
 
-export function getStaticPaths() {
-  return Object.keys(ui).map((lang) => {
-    return { params: { lang } };
-  });
-}
-
-const { lang } = Astro.params;
-const t = useTranslations(lang as keyof typeof ui);
+const t = useTranslations();
 
 const pageTitle = `Zahit | ${t('tags.title')}`;
 const pageDescription = t('tags.description');
 
-const posts: CollectionEntry<'blog'>[] = await getCollection('blog', (post: CollectionEntry<'blog'>) => {
-  return post.id.startsWith(`${lang}/`);
-});
+const posts: CollectionEntry<'blog'>[] = await getCollection('blog');
 
-// Count posts per tag
 const tagCounts = posts.reduce<Record<string, number>>((acc, post) => {
   const tags = post.data.tags || [];
   tags.forEach((tag: string) => {
@@ -43,7 +32,7 @@ const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1] || a[0].
 		{sortedTags.length > 0 ? (
 			<div class="tags-grid">
 				{sortedTags.map(([tag, count]) => (
-					<a href={`/${lang}/tags/${tag}/`} class="tag-card">
+					<a href={`/tags/${tag}/`} class="tag-card">
 						<span class="tag-name">#{tag}</span>
 						<span class="tag-count">
 							{count} {t('tags.postsCount')}

@@ -67,4 +67,4 @@ With this configuration, readers can toggle back and forth between English and T
 
 Now that you know how to organize and draft posts, you are ready to adjust the design tokens, switch colors, and modify your social link matrices.
 
-Read our final guide: **[Zahit Theme: Advanced Customization & Colors](/en/blog/customization/)** to learn more.
+Read our final guide: **[Zahit Theme: Advanced Customization & Colors](/blog/customization/)** to learn more.

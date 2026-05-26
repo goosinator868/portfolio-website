@@ -1,6 +1,4 @@
 ---
-import { getLangFromUrl } from '../i18n/utils';
-
 export interface Props {
 	title: string;
 	description: string;
@@ -8,7 +6,6 @@ export interface Props {
 }
 
 const { title, description, image = '/zahit.png' } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
 ---
 
 <!-- Global Metadata -->
@@ -18,9 +15,8 @@ const lang = getLangFromUrl(Astro.url);
 <link rel="icon" href="/favicon.ico" />
 <meta name="generator" content={Astro.generator} />
 
-<!-- RSS Feeds -->
-<link rel="alternate" type="application/rss+xml" title={`${title} (${lang.toUpperCase()} RSS)`} href={`/${lang}/rss.xml`} />
-<link rel="alternate" type="application/rss+xml" title={`${title} (Global RSS)`} href="/rss.xml" />
+<!-- RSS Feed -->
+<link rel="alternate" type="application/rss+xml" title={`${title} RSS`} href="/rss.xml" />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

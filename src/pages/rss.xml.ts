@@ -11,8 +11,6 @@ export async function GET(context: any) {
     description: SITE_CONFIG.description,
     site: context.site || SITE_CONFIG.url,
     items: posts.map((post) => {
-      const [lang, ...slugParts] = post.id.split('/');
-      const slugWithoutLang = slugParts.join('/');
       const htmlContent = post.rendered?.html;
       const bodyContent = post.body ? `<content:encoded><![CDATA[${post.body}]]></content:encoded>` : '';
 
@@ -20,7 +18,7 @@ export async function GET(context: any) {
         title: post.data.title,
         pubDate: post.data.pubDate,
         description: post.data.description,
-        link: `/${lang}/blog/${slugWithoutLang}/`,
+        link: `/blog/${post.id}/`,
         content: htmlContent,
         customData: !htmlContent ? bodyContent : '',
       };

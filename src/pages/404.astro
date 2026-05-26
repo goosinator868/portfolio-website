@@ -1,32 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getLangFromUrl } from '../i18n/utils';
-
-const lang = getLangFromUrl(Astro.url);
-const isTr = lang === 'tr';
-
-const content = {
-    title: isTr ? '404 | Sayfa Bulunamadı' : '404 | Page Not Found',
-    heading: '404',
-    sub: isTr ? 'Sayfa bulunamadı.' : 'Page not found.',
-    body: isTr
-        ? 'Aradığınız sayfa taşınmış, silinmiş ya da hiç var olmamış olabilir. Bazen kaybolmak da bir başlangıçtır.'
-        : `The page you're looking for may have moved, been deleted, or never existed. Sometimes getting lost is where it starts.`,
-    home: isTr ? 'Ana sayfaya dön' : 'Return home',
-    archive: isTr ? 'Yazılara göz at' : 'Browse posts',
-    homeHref: `/${lang}/`,
-    archiveHref: `/${lang}/archive/`,
-};
 ---
 
-<BaseLayout title={content.title} description={content.sub}>
+<BaseLayout title="404 | Page Not Found" description="Page not found.">
     <div class="not-found">
         <span class="code">404</span>
-        <h1>{content.sub}</h1>
-        <p>{content.body}</p>
+        <h1>Page not found.</h1>
+        <p>
+            The page you're looking for may have moved, been deleted, or never existed.
+            Sometimes getting lost is where it starts.
+        </p>
         <div class="actions">
-            <a href={content.homeHref}>{content.home}</a>
-            <a href={content.archiveHref} class="secondary">{content.archive}</a>
+            <a href="/">Return home</a>
+            <a href="/archive/" class="secondary">Browse posts</a>
         </div>
     </div>
 </BaseLayout>

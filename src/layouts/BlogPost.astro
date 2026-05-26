@@ -3,15 +3,13 @@ import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from 'astro';
 import BaseLayout from './BaseLayout.astro';
 import { useTranslations } from '../i18n/utils';
-import { getLangFromUrl } from '../i18n/utils';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	headings?: MarkdownHeading[];
 };
 
 const { title, description, pubDate, updatedDate, tags, headings = [] } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useTranslations();
 
 const tocHeadings = headings.filter((h: MarkdownHeading) => h.depth === 2 || h.depth === 3);
 ---
@@ -24,7 +22,7 @@ const tocHeadings = headings.filter((h: MarkdownHeading) => h.depth === 2 || h.d
 				<div class="meta">
 					<span>
 						{t('post.publishedOn')} <time datetime={pubDate.toISOString()}>
-							{pubDate.toLocaleDateString(lang, {
+							{pubDate.toLocaleDateString('en', {
 								year: 'numeric',
 								month: 'long',
 								day: 'numeric',
@@ -35,7 +33,7 @@ const tocHeadings = headings.filter((h: MarkdownHeading) => h.depth === 2 || h.d
 						updatedDate && (
 							<span class="updated">
 								{t('post.updatedOn')} <time datetime={updatedDate.toISOString()}>
-									{updatedDate.toLocaleDateString(lang, {
+									{updatedDate.toLocaleDateString('en', {
 										year: 'numeric',
 										month: 'long',
 										day: 'numeric',
@@ -49,7 +47,7 @@ const tocHeadings = headings.filter((h: MarkdownHeading) => h.depth === 2 || h.d
 					tags && tags.length > 0 && (
 						<div class="tags">
 							{tags.map((tag: string) => (
-								<a href={`/${lang}/tags/${tag}/`} class="tag">#{tag}</a>
+								<a href={`/tags/${tag}/`} class="tag">#{tag}</a>
 							))}
 						</div>
 					)

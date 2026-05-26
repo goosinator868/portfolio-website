@@ -1,13 +1,11 @@
 ---
-import { Image } from "astro:assets";
-import { getLangFromUrl } from "../i18n/utils";
-import { Icon } from "astro-icon/components";
-import { AUTHOR, SOCIALS } from "../config";
-import avatarImage from "../assets/profile.jpg";
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { AUTHOR, SOCIALS } from '../config';
+import avatarImage from '../assets/profile.jpg';
 
-const lang = getLangFromUrl(Astro.url);
-const role = AUTHOR.role[lang as keyof typeof AUTHOR.role] ?? AUTHOR.role.en;
-const bio = AUTHOR.bio[lang as keyof typeof AUTHOR.bio] ?? AUTHOR.bio.en;
+const role = AUTHOR.role;
+const bio = AUTHOR.bio;
 ---
 
 <div class="profile-card">
@@ -31,7 +29,7 @@ const bio = AUTHOR.bio[lang as keyof typeof AUTHOR.bio] ?? AUTHOR.bio.en;
         {
             SOCIALS.map((social) => {
                 const href =
-                    social.label === "RSS" ? `/${lang}/rss.xml` : social.href;
+                    social.label === 'RSS' ? '/rss.xml' : social.href;
                 return (
                     <a
                         href={href}
